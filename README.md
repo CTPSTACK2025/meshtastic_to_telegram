@@ -17,5 +17,5 @@ A simple Python script that listens to a Meshtastic device via USB (Serial) and 
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/yourusername/meshtastic-telegram-bridge.git
+   git clone https://github.com/CTPSTACK2025/meshtastic_to_telegram.git
    cd meshtastic-telegram-bridge
