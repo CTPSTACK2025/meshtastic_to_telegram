@@ -17,7 +17,7 @@ A simple, robust Python script that connects to a Meshtastic device via USB (Ser
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/CTPSTACK2025/meshtastic-telegram-bridge.git
+   git clone https://github.com/CTPSTACK2025/meshtastic_to_telegram.git
    cd meshtastic-telegram-bridge
    ```
 
@@ -45,8 +45,3 @@ python bridge.py
 [MIT](LICENSE)
 ```
 
-### Suggested Repository Names
-*   `meshtastic-telegram-bridge`
-*   `mesh-to-telegram`
-*   `meshtastic-serial-gateway`
-*   `lora-telegram-forwarder`
