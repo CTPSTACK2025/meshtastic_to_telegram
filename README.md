@@ -1,113 +1,75 @@
+### Option 1: Short & Punchy (Best for the "About" sidebar)
+> A lightweight Python bridge that forwards messages from a Meshtastic device (via Serial/USB) to a Telegram Chat. Features automatic node name resolution and connection recovery.
+
+### Option 2: Professional & Descriptive
+> **Meshtastic to Telegram Relay**
+> A robust Python service that listens to a local Meshtastic node via serial connection and pushes incoming mesh messages to a specified Telegram group or user. It resolves Node IDs to user names and includes auto-reconnection logic for long-running reliability.
+
+### Option 3: Feature Focused
+> **Meshtastic-Telegram-Gateway**
+> Connect your LoRa mesh to the cloud.
+> * 📩 Real-time message forwarding to Telegram.
+> * 👤 Resolves Node IDs to Long/Short names.
+> * 🔌 USB/Serial connection with auto-detect.
+> * 🔄 Auto-reconnect logic for network stability.
+> * 🔐 Secure configuration using `.env`.
+
+---
+
+### Recommended `README.md` Content
+
+If you are initializing the repository, here is a template for your `README.md` based specifically on the code you provided:
 
 ```markdown
 # 📡 Meshtastic to Telegram Bridge
 
-
-A robust Python bridge that connects your **Meshtastic LoRa mesh network** to a **Telegram Chat**.
-
-This script listens to a Meshtastic device connected via USB/Serial, resolves the sender's name (User ID -> Friendly Name), and forwards messages to a Telegram Group or Private Chat in real-time.
+A simple, robust Python script that connects to a Meshtastic device via USB (Serial) and forwards all received text messages to a Telegram Chat via a Bot.
 
 ## ✨ Features
+- **Real-time Forwarding:** Instantly sends received Mesh packets to Telegram.
+- **Name Resolution:** Automatically converts Node IDs (e.g., `!12345678`) to friendly User Names (Long/Short names).
+- **Auto-Recovery:** Includes logic to detect connection loss and attempt reconnection automatically.
+- **Secure:** Uses environment variables for Bot Tokens and Chat IDs.
 
-- **🔗 Serial/USB Connection:** Automatically detects and connects to Meshtastic devices (T-Beam, Heltec, RAK, etc.).
-- **👤 Name Resolution:** Instead of showing raw Node IDs (e.g., `!289a1c`), it looks up the **friendly username** from the node database.
-- **🔄 Auto-Reconnect:** Automatically attempts to reconnect if the device restarts or the USB cable is unplugged.
-- **🔒 Secure Configuration:** Uses `.env` files to keep your Telegram tokens safe and out of the code.
-- **📝 Logging:** Detailed console logs with timestamps for easier troubleshooting.
+## 🛠️ Prerequisites
 
-## 🛠️ Hardware Requirements
+- Python 3.7+
+- A Meshtastic Device connected via USB
 
-1. A generic computer, Laptop, or **Raspberry Pi** (Recommended for 24/7 operation).
-2. A Meshtastic-compatible device (ESP32, nRF52, etc.).
-3. A USB data cable.
+## 📦 Installation
 
-## 🚀 Installation
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/yourusername/meshtastic-telegram-bridge.git
+   cd meshtastic-telegram-bridge
+   ```
 
-### 1. Clone the Repository
-```bash
-git clone https://github.com/yourusername/meshtastic-telegram-bridge.git
-cd meshtastic-telegram-bridge
-```
+2. **Install dependencies:**
+   ```bash
+   pip install meshtastic requests python-dotenv pubsub
+   ```
 
-### 2. Install Dependencies
-You will need Python 3 installed. Install the required libraries:
+3. **Configuration:**
+   Create a `.env` file in the root directory:
+   ```ini
+   TELEGRAM_BOT_TOKEN=your_bot_token_here
+   TELEGRAM_CHAT_ID=your_chat_id_here
+   # SERIAL_PORT=/dev/ttyUSB0  <-- Optional: Leave out to auto-detect
+   ```
 
-```bash
-pip install meshtastic requests python-dotenv pubsub
-```
-
-### 3. Setup Telegram Bot
-1. Open Telegram and search for **@BotFather**.
-2. Send `/newbot` and follow the instructions to get your **Bot Token**.
-3. Create a group (or use a private chat) and add your bot to it.
-4. Get your **Chat ID** (You can forward a message to `@userinfobot` or use the API to find it).
-
-### 4. Configuration (.env)
-Create a file named `.env` in the project folder:
-
-```bash
-nano .env
-```
-
-Paste your credentials inside:
-
-```ini
-TELEGRAM_BOT_TOKEN=123456789:ABCdefGHIjklMNOpqrsTUVwxyz
-TELEGRAM_CHAT_ID=-1001234567890
-```
-*Note: If sending to a group topic, the Chat ID usually starts with `-100`.*
-
-## 🏃 Usage
+## 🚀 Usage
 
 Run the script:
-
 ```bash
-python main.py
+python bridge.py
 ```
 
-**Expected Output:**
-```text
-2023-10-27 10:00:01 - INFO - Starting Meshtastic to Telegram Bridge...
-2023-10-27 10:00:03 - INFO - ✅ Connected to radio on /dev/ttyUSB0
+## 📝 License
+[MIT](LICENSE)
 ```
 
-## ⚙️ Running as a Service (Linux/Raspberry Pi)
-
-To keep the bridge running 24/7 in the background and restart automatically on boot:
-
-1. Create a service file:
-   ```bash
-   sudo nano /etc/systemd/system/meshbridge.service
-   ```
-
-2. Paste the following (adjust paths to match your setup):
-   ```ini
-   [Unit]
-   Description=Meshtastic Telegram Bridge
-   After=network.target
-
-   [Service]
-   User=pi
-   WorkingDirectory=/home/pi/meshtastic-telegram-bridge
-   ExecStart=/usr/bin/python3 /home/pi/meshtastic-telegram-bridge/main.py
-   Restart=always
-   RestartSec=10
-
-   [Install]
-   WantedBy=multi-user.target
-   ```
-
-3. Enable and start the service:
-   ```bash
-   sudo systemctl enable meshbridge
-   sudo systemctl start meshbridge
-   ```
-
-## 🤝 Contributing
-
-Pull requests are welcome! For major changes, please open an issue first to discuss what you would like to change.
-
-## 📄 License
-
-[MIT](https://choosealicense.com/licenses/mit/)
-```
+### Suggested Repository Names
+*   `meshtastic-telegram-bridge`
+*   `mesh-to-telegram`
+*   `meshtastic-serial-gateway`
+*   `lora-telegram-forwarder`
