@@ -1,24 +1,4 @@
-### Option 1: Short & Punchy (Best for the "About" sidebar)
-> A lightweight Python bridge that forwards messages from a Meshtastic device (via Serial/USB) to a Telegram Chat. Features automatic node name resolution and connection recovery.
 
-### Option 2: Professional & Descriptive
-> **Meshtastic to Telegram Relay**
-> A robust Python service that listens to a local Meshtastic node via serial connection and pushes incoming mesh messages to a specified Telegram group or user. It resolves Node IDs to user names and includes auto-reconnection logic for long-running reliability.
-
-### Option 3: Feature Focused
-> **Meshtastic-Telegram-Gateway**
-> Connect your LoRa mesh to the cloud.
-> * 📩 Real-time message forwarding to Telegram.
-> * 👤 Resolves Node IDs to Long/Short names.
-> * 🔌 USB/Serial connection with auto-detect.
-> * 🔄 Auto-reconnect logic for network stability.
-> * 🔐 Secure configuration using `.env`.
-
----
-
-### Recommended `README.md` Content
-
-If you are initializing the repository, here is a template for your `README.md` based specifically on the code you provided:
 
 ```markdown
 # 📡 Meshtastic to Telegram Bridge
