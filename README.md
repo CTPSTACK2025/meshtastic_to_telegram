@@ -1,11 +1,7 @@
-Here is a professional, formatted `README.md` tailored for the improved version of your code. You can copy and paste this directly into your repository.
 
 ```markdown
 # 📡 Meshtastic to Telegram Bridge
 
-![Python](https://img.shields.io/badge/Python-3.x-blue?style=flat-square&logo=python)
-![Meshtastic](https://img.shields.io/badge/Meshtastic-Supported-green?style=flat-square)
-![Telegram](https://img.shields.io/badge/Telegram-Bot%20API-blue?style=flat-square&logo=telegram)
 
 A robust Python bridge that connects your **Meshtastic LoRa mesh network** to a **Telegram Chat**.
 
