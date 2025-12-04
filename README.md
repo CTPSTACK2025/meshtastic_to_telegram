@@ -1,6 +1,3 @@
-
-
-```markdown
 # 📡 Meshtastic to Telegram Bridge
 
 A simple, robust Python script that connects to a Meshtastic device via USB (Serial) and forwards all received text messages to a Telegram Chat via a Bot.
