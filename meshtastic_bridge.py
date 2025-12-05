@@ -8,16 +8,26 @@ import meshtastic.serial_interface
 from pubsub import pub
 from dotenv import load_dotenv
 
-# --- Setup Logging ---
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s',
-    datefmt='%Y-%m-%d %H:%M:%S'
-)
-logger = logging.getLogger(__name__)
+# --- Setup Logging (File + Console) ---
+# Create a custom logger
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
+
+# Create handlers
+c_handler = logging.StreamHandler(sys.stdout)      # Output to Console
+f_handler = logging.FileHandler('meshtastic_log.txt', encoding='utf-8') # Output to File
+
+# Create formatters and add them to handlers
+log_format = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
+c_handler.setFormatter(log_format)
+f_handler.setFormatter(log_format)
+
+# Add handlers to the logger
+logger.addHandler(c_handler)
+logger.addHandler(f_handler)
 
 # --- Load Configuration ---
-load_dotenv() # Loads variables from .env file
+load_dotenv() 
 TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
 CHAT_ID = os.getenv('TELEGRAM_CHAT_ID')
 SERIAL_PORT = None # Set to None for auto-detect
@@ -48,7 +58,6 @@ def send_telegram_message(message):
     }
     
     try:
-        # Added timeout to prevent hanging
         response = requests.post(url, data=data, timeout=10)
         response.raise_for_status()
     except requests.exceptions.RequestException as e:
@@ -57,15 +66,24 @@ def send_telegram_message(message):
 def on_receive(packet, interface):
     """Callback function triggered when a packet is received."""
     try:
-        if 'decoded' in packet and 'text' in packet['decoded']:
-            msg_text = packet['decoded']['text']
-            sender_id = packet.get('fromId')
+        # Get sender info for logging
+        sender_id = packet.get('fromId')
+        sender_name = get_node_name(sender_id)
+        
+        # --- LOGGING ALL PACKETS ---
+        # This ensures ALL channel messages (Telemetry, Position, Text) go to the txt file
+        decoded = packet.get('decoded', {})
+        portnum = decoded.get('portnum', 'UNKNOWN')
+        
+        # Basic log for every packet received
+        logger.info(f"📥 Packet Received | Type: {portnum} | From: {sender_name} | Data: {decoded}")
+
+        # --- TELEGRAM LOGIC (TEXT ONLY) ---
+        if 'text' in decoded and decoded['text']:
+            msg_text = decoded['text']
             
-            # Resolve the nice name
-            sender_name = get_node_name(sender_id)
-            
-            # Log to console
-            logger.info(f"📩 Message from {sender_name}: {msg_text}")
+            # Log specifically that we found a text message
+            logger.info(f"💬 Text Message detected from {sender_name}: {msg_text}")
             
             # Send to Telegram
             formatted_msg = (
@@ -82,6 +100,7 @@ def main():
     global mesh_interface
     
     logger.info("Starting Meshtastic to Telegram Bridge...")
+    logger.info("Logging output to: meshtastic_log.txt")
     
     while True:
         try:
@@ -97,7 +116,6 @@ def main():
             # Keep the script running and monitor connection
             while True:
                 time.sleep(1)
-                # Optional: Check if interface is still alive
                 if not mesh_interface.nodes:
                     raise Exception("Interface appears disconnected")
 
