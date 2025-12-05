@@ -1,3 +1,5 @@
+[![Traditional Chinese](https://img.shields.io/badge/Language-Traditional%20Chinese-blue)](README.zh-TW.md) [![English](https://img.shields.io/badge/Language-English-blue)](README.md)
+
 # 📡 Meshtastic to Telegram Bridge
 
 A simple, robust Python script that connects to a Meshtastic device via USB (Serial) and forwards all received text messages to a Telegram Chat via a Bot.
@@ -18,7 +20,7 @@ A simple, robust Python script that connects to a Meshtastic device via USB (Ser
 1. **Clone the repository:**
    ```bash
    git clone https://github.com/CTPSTACK2025/meshtastic_to_telegram.git
-   cd meshtastic-telegram-bridge
+   cd meshtastic_to_telegram
    ```
 
 2. **Install dependencies:**
@@ -38,7 +40,7 @@ A simple, robust Python script that connects to a Meshtastic device via USB (Ser
 
 Run the script:
 ```bash
-python bridge.py
+python meshtastic_bridge.py
 ```
 
 ## 📝 License
