@@ -1,5 +1,3 @@
-Here is the Traditional Chinese (Taiwan) version of your README file. I have adjusted the terminology to match the common usage among Taiwanese developers (e.g., using "相依套件" for dependencies and keeping technical terms like "Serial" or "Token" in English where appropriate).
-
 ***
 
 # 📡 Meshtastic 至 Telegram 轉發器
